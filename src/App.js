@@ -86,7 +86,7 @@ function App() {
   const winFunc = (player) => {
     if (player === "O") {
       setWinO(winO + 1);
-      // finished = true
+      setTurn(player)
     } else {
       setWinX(winX + 1);
     }
@@ -99,15 +99,12 @@ function App() {
       ["", "", ""],
       ["", "", ""],
     ]);
-    // setTurnInd(0)
     setTurnInd(0);
     console.log(turnInd);
     setFinished(false);
   };
   const draw = () => {
     if (turnInd > 7) {
-      // reset()
-      // setTurnInd(turnInd-8)
       setFinished(true);
       reset();
     }
