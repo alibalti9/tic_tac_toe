@@ -5,8 +5,11 @@ function App() {
   const [turn, setTurn] = useState("O");
   const [turnInd, setTurnInd] = useState(0);
   const [finished, setFinished] = useState(false);
-  let indexAll;
-  let howWin;
+  const [indexAll, setIndexAll] = useState("");
+  let winInd = 0;
+  const [howWin, setHowWin] = useState();
+  // let howWin;
+  let actionWin;
   const [winX, setWinX] = useState(0);
   const [winO, setWinO] = useState(0);
   const [array, setArray] = useState([
@@ -20,7 +23,7 @@ function App() {
     } else if (turn === "X") setTurn("O");
   };
   const setVal = (val, val2) => {
-    if (finished === false) {
+    if (!finished) {
       let tempArray = [...array];
       if (!tempArray[val][val2]?.length) {
         turnChange();
@@ -30,19 +33,42 @@ function App() {
         draw();
         checkWin();
       }
+    } else {
+      alert("finished");
     }
   };
   const checkWin = () => {
     let win = false;
     array.map((item, index) => {
-      let check = true;
+      let check = false;
       item.map((val, ind) => {
-        if ((check == val && !!val?.length && !!check) || check == true) {
-          check = val;
-          indexAll = ind
-          howWin="h " + val
-          // alert(val)
-        } else check = false;
+        if (array[index][winInd] === "O" || array[index][winInd] === "X") {
+          if (array[index][winInd] === "O") {
+            winInd++;
+            console.log(winInd);
+            if (winInd > 2) {
+              check = val;
+              setIndexAll(index);
+              // howWin = "s" + index ;
+              setHowWin("s" + index);
+              console.log(indexAll);
+            }
+          }
+          if (array[index][winInd] === "X") {
+            if (array[index][winInd] === "O") {
+              winInd++;
+              console.log(winInd);
+              if (winInd > 2) {
+                check = val;
+                setIndexAll(index);
+                // howWin = "s" + index ;
+                setHowWin("s" + index);
+                console.log(indexAll);
+              }
+            }
+          }
+        }
+        // } else check = false;
       });
       if (check) win = check;
     });
@@ -50,50 +76,55 @@ function App() {
       let check = false;
       item.map((val, ind) => {
         if (
-          array[1][ind] == array[0][ind] &&
-          array[2][ind] == array[0][ind] &&
-          array[1][ind] == array[2][ind] &&
+          array[1][ind] === array[0][ind] &&
+          array[2][ind] === array[0][ind] &&
+          array[1][ind] === array[2][ind] &&
           array[0][ind] !== ""
         ) {
           check = val;
-          indexAll = ind
-          howWin = "stand " + ind
+          setIndexAll(ind);
+          actionWin = "stand";
+          setHowWin(actionWin + ind);
+          // alert(i)
         } else if (
-          val[ind] == array[2][2] &&
-          array[ind][ind] == array[1][1] &&
-          array[1][1] == array[2][2] &&
+          val[ind] === array[2][2] &&
+          array[ind][ind] === array[1][1] &&
+          array[1][1] === array[2][2] &&
           array[ind][ind] !== ""
         ) {
           check = val;
-          indexAll = ind
+          setIndexAll(1);
+          actionWin = "tilt";
+          setHowWin(actionWin + 1);
         } else if (
-          array[0][2] == array[2][0] &&
-          array[0][2] == array[1][1] &&
-          array[1][1] == array[2][0] &&
+          array[0][2] === array[2][0] &&
+          array[0][2] === array[1][1] &&
+          array[1][1] === array[2][0] &&
           array[1][1] !== ""
         ) {
           check = val;
-          indexAll = ind
+          setIndexAll(2);
+          setHowWin("tilt" + 2);
         }
-        // else if(array)
-        // win = true
-        // }
       });
       if (check) win = check;
     });
     if (win) winFunc(win);
   };
   const winFunc = (player) => {
+    setFinished(true);
     if (player === "O") {
       setWinO(winO + 1);
-      setTurn(player)
+      setTurn(player);
+      console.log(howWin);
+      // finished = true
     } else {
+      console.log(howWin);
       setWinX(winX + 1);
     }
-    setFinished(true);
-    // setWinPlayer([winO, winX]);
   };
   const reset = () => {
+    setFinished(false);
     setArray([
       ["", "", ""],
       ["", "", ""],
@@ -101,7 +132,6 @@ function App() {
     ]);
     setTurnInd(0);
     console.log(turnInd);
-    setFinished(false);
   };
   const draw = () => {
     if (turnInd > 7) {
@@ -109,7 +139,6 @@ function App() {
       reset();
     }
   };
-
   return (
     <div className="App">
       <div className="mainGame">
@@ -127,19 +156,19 @@ function App() {
         {array?.map((item, index) => (
           <div
             className={`${
-              index == 0 ? "firstRow" : index == 1 ? "secondRow" : "thirdRow"
+              index === 0 ? "firstRow" : index === 1 ? "secondRow" : "thirdRow"
             } row`}
           >
             {item?.map((item2, index2) => (
               <div
                 className={`s ${
-                  index == 0 ? "a a" : index == 1 ? "b b" : "c c"
+                  index === 0 ? "a a" : index === 1 ? "b b" : "c c"
                 }${index2} ${
-                  index2 == 0 ? "one" : index2 == 1 ? "two" : "three"
+                  index2 === 0 ? "one" : index2 === 1 ? "two" : "three"
                 }`}
               >
                 <h1
-                  className={`${item2 == "O" ? "blue" : "red"}`}
+                  className={`${item2 === "O" ? "blue" : "red"}`}
                   onClick={() => setVal(index, index2)}
                 >
                   {item2}
@@ -148,7 +177,7 @@ function App() {
             ))}
           </div>
         ))}
-        {/* <div className={`over ${howWin = "stand " + indexAll ? "stand" + indexAll : "other" }`}>|</div> */}
+        <h2 className={`over ${finished ? "show" : "hide"} ${howWin}`}></h2>
       </div>
     </div>
   );
