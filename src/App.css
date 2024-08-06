@@ -14,7 +14,6 @@ p{
   font-weight: 100;
   font-size: 40px;
   margin: 10px;
-  /* text-shadow: 0 0 8px  blue; */
 }
 
 button{
@@ -23,6 +22,7 @@ button{
   border: 1px solid white;
   border-radius: 5px ;
   transition: 900ms;
+  margin: 5px;
 }
 button:hover{
   background-color: white;
@@ -44,18 +44,18 @@ button:hover{
 }
 
 .blue{
-  text-shadow: 0 0 8px  blue;
+  text-shadow: 0 0 14px  blue;
 }
 
 .red{
-  text-shadow: 0 0 8px  red;
+  text-shadow: 0 0 14px  red;
 }
 
 h1{
   color: white;
   font-size: 100px !important;
   font-weight: 400;
-  text-shadow: 0 0 8px  red;
+  text-shadow: 0 0px 14px  red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,30 +74,88 @@ h1{
   align-items: center !important;
   justify-content: center;
   cursor: pointer;
-  /* box-shadow: blue 0px 0px 10px 8px; */
-  /* background-color: aquamarine; */
+}
+
+.s0{
+  transform: rotateZ(90deg) !important;
+  margin-left: 190px !important;
+  top: -48px;
+}
+
+.s1{
+  transform: rotateZ(90deg) !important;
+  top: 82px !important;
+  margin-left: 190px !important;
+}
+
+.s2{
+  transform: rotateZ(90deg) !important;
+  left: 50 !important;
+  margin-left: 190px !important;
+  top: 213px;
+}
+
+.stand0{
+  transform: rotateZ(0deg) !important;
+  left: 50 !important;
+  margin-left: 60px !important;
+  bottom: 0px;
 }
 
 .stand1{
   transform: rotateZ(0deg) !important;
+  left: 50 !important;
+  margin-left: 192px !important;
+  bottom: 0px;
+}
+
+.stand2{
+  transform: rotateZ(0deg) !important;
+  left: 50 !important;
+  margin-left: 324px !important;
+  bottom: 0px;
+}
+
+.tilt1{
+  transform: rotateZ(135deg) !important;
+  left: 195px !important;
+  top: 65px;
+  height: 390px !important;
+}
+
+.tilt2{
+  transform: rotateZ(45deg) !important;
+  left: 195px !important;
+  top: 65px;
+  height: 390px !important;
+}
+
+.show{
+  display: flex ;
+}
+
+.hide{
+  display: none !important;
+}
+
+.askBox{
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  border: 2px solid white;
+  box-shadow: blue 0 0 50px 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .over{
   color: white;
-  /* font-size: 250px; */
-  /* font-weight: 100; */
   background-color: white;
   width: 10px;
   height: 350px;
   position: absolute;
-  /* right: 0 !important; */
-  margin-left: 190px !important;
-  left: 100;
-  /* top: 40px; */
   transform: rotateZ(90deg);
-  bottom: 20px;
-  /* margin-top: 200px; */
-  /* margin-bottom: 50px; */
   z-index: 1;
   border-radius: 5px;
   box-shadow: blue 0 0 8px 2px;
@@ -105,7 +163,6 @@ h1{
 
 .a{
   border-bottom: cyan 2px solid;
-  /* border-radius: 1px; */
 }
 
 .c{
