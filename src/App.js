@@ -44,24 +44,39 @@ function App() {
       let check = false;
       item.map((val, ind) => {
         if (array[index][winInd] === "O" || array[index][winInd] === "X") {
+          // if (array[index][winInd] === "O") {
+          //   if (winIndex == index) {
+          //     winInd++;
+          //     console.log(winInd);
+          //     if (winInd < 2) {
+          //       winIndex = index
+          //     }
+          //     if (winIndex === index || winIndex === false) { 
+          //       if (winInd > 2) {
+          //         check = val;
+          //         setIndexAll(index);
+          //         // howWin = "s" + index ;
+          //         setHowWin("s" + index);
+          //         console.log(indexAll);
+          //       }
+          //     }
+          //   }
+          // }
           if (array[index][winInd] === "O") {
-            if (winIndex == index) {
+            // if (array[index][winInd] === "O") {
+            if (array[0][1] !== "O" && array[1][1] !== "O" && array[1][0] !== "O") {
               
               winInd++;
               console.log(winInd);
-              if (winInd < 2) {
-                winIndex = index
-              }
-              if (winIndex === index || winIndex === false) { 
-                if (winInd > 2) {
-                  check = val;
-                  setIndexAll(index);
-                  // howWin = "s" + index ;
-                  setHowWin("s" + index);
-                  console.log(indexAll);
-                }
+              if (winInd > 2) {
+                check = val;
+                setIndexAll(index);
+                // howWin = "s" + index ;
+                setHowWin("s" + index);
+                console.log(indexAll);
               }
             }
+            // }
           }
           if (array[index][winInd] === "X") {
             // if (array[index][winInd] === "O") {
