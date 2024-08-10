@@ -7,6 +7,7 @@ function App() {
   const [finished, setFinished] = useState(false);
   const [indexAll, setIndexAll] = useState("");
   let winInd = 0;
+  let winIndex = false;
   const [howWin, setHowWin] = useState();
   // let howWin;
   let actionWin;
@@ -44,18 +45,26 @@ function App() {
       item.map((val, ind) => {
         if (array[index][winInd] === "O" || array[index][winInd] === "X") {
           if (array[index][winInd] === "O") {
-            winInd++;
-            console.log(winInd);
-            if (winInd > 2) {
-              check = val;
-              setIndexAll(index);
-              // howWin = "s" + index ;
-              setHowWin("s" + index);
-              console.log(indexAll);
+            if (winIndex == index) {
+              
+              winInd++;
+              console.log(winInd);
+              if (winInd < 2) {
+                winIndex = index
+              }
+              if (winIndex === index || winIndex === false) { 
+                if (winInd > 2) {
+                  check = val;
+                  setIndexAll(index);
+                  // howWin = "s" + index ;
+                  setHowWin("s" + index);
+                  console.log(indexAll);
+                }
+              }
             }
           }
           if (array[index][winInd] === "X") {
-            if (array[index][winInd] === "O") {
+            // if (array[index][winInd] === "O") {
               winInd++;
               console.log(winInd);
               if (winInd > 2) {
@@ -65,7 +74,7 @@ function App() {
                 setHowWin("s" + index);
                 console.log(indexAll);
               }
-            }
+            // }
           }
         }
         // } else check = false;
@@ -124,7 +133,7 @@ function App() {
     }
   };
   const reset = () => {
-    setFinished(false);
+    setFinished(true);
     setArray([
       ["", "", ""],
       ["", "", ""],
@@ -135,8 +144,15 @@ function App() {
   };
   const draw = () => {
     if (turnInd > 7) {
-      setFinished(true);
-      reset();
+      // setFinished(false);
+        // setArray([
+        //   ["", "", ""],
+        //   ["", "", ""],
+        //   ["", "", ""],
+        // ]);
+      // setTurnInd(0);
+      reset(); 
+      // reset();
     }
   };
   return (
