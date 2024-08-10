@@ -133,7 +133,8 @@ function App() {
     }
   };
   const reset = () => {
-    setFinished(true);
+    setFinished(false);
+    console.log(finished)
     setArray([
       ["", "", ""],
       ["", "", ""],
