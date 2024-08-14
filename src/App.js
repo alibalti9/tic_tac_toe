@@ -25,6 +25,7 @@ function App() {
   };
   const setVal = (val, val2) => {
     if (!finished) {
+      // console.log(array[0][0] = "X")
       let tempArray = [...array];
       if (!tempArray[val][val2]?.length) {
         turnChange();
@@ -43,56 +44,12 @@ function App() {
     array.map((item, index) => {
       let check = false;
       item.map((val, ind) => {
-        if (array[index][winInd] === "O" || array[index][winInd] === "X") {
-          // if (array[index][winInd] === "O") {
-          //   if (winIndex == index) {
-          //     winInd++;
-          //     console.log(winInd);
-          //     if (winInd < 2) {
-          //       winIndex = index
-          //     }
-          //     if (winIndex === index || winIndex === false) { 
-          //       if (winInd > 2) {
-          //         check = val;
-          //         setIndexAll(index);
-          //         // howWin = "s" + index ;
-          //         setHowWin("s" + index);
-          //         console.log(indexAll);
-          //       }
-          //     }
-          //   }
-          // }
-          if (array[index][winInd] === "O") {
-            // if (array[index][winInd] === "O") {
-            if (array[0][1] !== "O" && array[1][1] !== "O" && array[1][0] !== "O") {
-              
-              winInd++;
-              console.log(winInd);
-              if (winInd > 2) {
-                check = val;
-                setIndexAll(index);
-                // howWin = "s" + index ;
-                setHowWin("s" + index);
-                console.log(indexAll);
-              }
-            }
-            // }
-          }
-          if (array[index][winInd] === "X") {
-            // if (array[index][winInd] === "O") {
-              winInd++;
-              console.log(winInd);
-              if (winInd > 2) {
-                check = val;
-                setIndexAll(index);
-                // howWin = "s" + index ;
-                setHowWin("s" + index);
-                console.log(indexAll);
-              }
-            // }
-          }
+        if(array[ind][1] === array[ind][2] && array[ind][0] === array[ind][1] && array[ind][1] !== ""){
+          check = val;
+          setIndexAll(ind);
+          actionWin = "s";
+          setHowWin(actionWin + ind);
         }
-        // } else check = false;
       });
       if (check) win = check;
     });
@@ -141,10 +98,12 @@ function App() {
       setWinO(winO + 1);
       setTurn(player);
       console.log(howWin);
+      draw()
       // finished = true
     } else {
       console.log(howWin);
       setWinX(winX + 1);
+      draw()
     }
   };
   const reset = () => {
