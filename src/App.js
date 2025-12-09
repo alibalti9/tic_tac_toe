@@ -104,34 +104,51 @@ function App() {
 
   // ---------- WIN HANDLER ----------
   const winFunc = (player) => {
-    setFinished(true);
-    if (player === "O") {
-      setWinO((prev) => prev + 1);
-    } else {
-      setWinX((prev) => prev + 1);
-    }
-  };
+  setFinished(true);
+
+  if (player === "O") {
+    setWinO((prev) => prev + 1);
+  } else {
+    setWinX((prev) => prev + 1);
+  }
+
+  // next round starts with the winner
+  setTurn(player);
+};
+
 
   // ---------- DRAW CHECK ----------
   const draw = () => {
-    if (turnInd >= 8 && !finished) {
-      reset();
-    }
-  };
+  if (turnInd >= 8 && !finished) {
+    turnChange(); // draw switches turn
+    reset(false); // false = preserve turn
+  }
+};
 
-  // ---------- RESET ----------
-  const reset = () => {
-    setFinished(false);
-    setArray([
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""],
-    ]);
-    setTurnInd(0);
-    setTurn("O");
-    setHowWin("");
-    setIndexAll("");
-  };
+
+  // ---------- RESET ----------// resetGameTurn === true  --> keep current turn
+// resetGameTurn === false --> don't change turn
+const reset = (keepTurn = true) => {
+  setFinished(false);
+
+  setArray([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ]);
+
+  setTurnInd(0);
+  setHowWin("");
+  setIndexAll("");
+
+  if (!keepTurn) {
+    // draw → turn should switch
+    return; 
+  }
+
+  // winner keeps turn (do nothing)
+};
+
 
   return (
     <div className="App">
