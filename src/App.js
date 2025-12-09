@@ -6,171 +6,173 @@ function App() {
   const [turnInd, setTurnInd] = useState(0);
   const [finished, setFinished] = useState(false);
   const [indexAll, setIndexAll] = useState("");
-  let winInd = 0;
-  let winIndex = false;
   const [howWin, setHowWin] = useState();
-  // let howWin;
-  let actionWin;
   const [winX, setWinX] = useState(0);
   const [winO, setWinO] = useState(0);
+
   const [array, setArray] = useState([
     ["", "", ""],
     ["", "", ""],
     ["", "", ""],
   ]);
-  const turnChange = (val) => {
-    if (turn === "O") {
-      setTurn("X");
-    } else if (turn === "X") setTurn("O");
+
+  // ---------- TURN SWITCH ----------
+  const turnChange = () => {
+    setTurn((prev) => (prev === "O" ? "X" : "O"));
   };
-  const setVal = (val, val2) => {
-    if (!finished) {
-      // console.log(array[0][0] = "X")
-      let tempArray = [...array];
-      if (!tempArray[val][val2]?.length) {
-        turnChange();
-        tempArray[val][val2] = turn;
-        setArray(tempArray);
-        setTurnInd(turnInd + 1);
-        draw();
-        checkWin();
-      }
-    } else {
+
+  // ---------- HANDLE CLICK ----------
+  const setVal = (r, c) => {
+    if (finished) {
       alert("finished");
+      return;
+    }
+
+    // deep clone 2D array
+    let tempArray = array.map((row) => [...row]);
+
+    if (tempArray[r][c] === "") {
+      tempArray[r][c] = turn; // use current turn BEFORE switching
+      setArray(tempArray);
+
+      setTurnInd((prev) => prev + 1);
+
+      checkWin(tempArray); // pass new board
+
+      turnChange(); // NOW switch
     }
   };
-  const checkWin = () => {
+
+  // ---------- CHECK WIN ----------
+  const checkWin = (board) => {
     let win = false;
-    array.map((item, index) => {
-      let check = false;
-      item.map((val, ind) => {
-        if(array[ind][1] === array[ind][2] && array[ind][0] === array[ind][1] && array[ind][1] !== ""){
-          check = val;
-          setIndexAll(ind);
-          actionWin = "s";
-          setHowWin(actionWin + ind);
-        }
-      });
-      if (check) win = check;
-    });
-    array.map((item, index) => {
-      let check = false;
-      item.map((val, ind) => {
-        if (
-          array[1][ind] === array[0][ind] &&
-          array[2][ind] === array[0][ind] &&
-          array[1][ind] === array[2][ind] &&
-          array[0][ind] !== ""
-        ) {
-          check = val;
-          setIndexAll(ind);
-          actionWin = "stand";
-          setHowWin(actionWin + ind);
-          // alert(i)
-        } else if (
-          val[ind] === array[2][2] &&
-          array[ind][ind] === array[1][1] &&
-          array[1][1] === array[2][2] &&
-          array[ind][ind] !== ""
-        ) {
-          check = val;
-          setIndexAll(1);
-          actionWin = "tilt";
-          setHowWin(actionWin + 1);
-        } else if (
-          array[0][2] === array[2][0] &&
-          array[0][2] === array[1][1] &&
-          array[1][1] === array[2][0] &&
-          array[1][1] !== ""
-        ) {
-          check = val;
-          setIndexAll(2);
-          setHowWin("tilt" + 2);
-        }
-      });
-      if (check) win = check;
-    });
-    if (win) winFunc(win);
+
+    // ROWS
+    for (let r = 0; r < 3; r++) {
+      if (
+        board[r][0] !== "" &&
+        board[r][0] === board[r][1] &&
+        board[r][1] === board[r][2]
+      ) {
+        win = board[r][0];
+        setIndexAll(r);
+        setHowWin("s" + r);
+      }
+    }
+
+    // COLUMNS
+    for (let c = 0; c < 3; c++) {
+      if (
+        board[0][c] !== "" &&
+        board[0][c] === board[1][c] &&
+        board[1][c] === board[2][c]
+      ) {
+        win = board[0][c];
+        setIndexAll(c);
+        setHowWin("stand" + c);
+      }
+    }
+
+    // DIAGONAL 1
+    if (
+      board[0][0] !== "" &&
+      board[0][0] === board[1][1] &&
+      board[1][1] === board[2][2]
+    ) {
+      win = board[0][0];
+      setIndexAll(1);
+      setHowWin("tilt1");
+    }
+
+    // DIAGONAL 2
+    if (
+      board[0][2] !== "" &&
+      board[0][2] === board[1][1] &&
+      board[1][1] === board[2][0]
+    ) {
+      win = board[0][2];
+      setIndexAll(2);
+      setHowWin("tilt2");
+    }
+
+    if (win) {
+      winFunc(win);
+    } else {
+      draw(); // check for draw
+    }
   };
+
+  // ---------- WIN HANDLER ----------
   const winFunc = (player) => {
     setFinished(true);
     if (player === "O") {
-      setWinO(winO + 1);
-      setTurn(player);
-      console.log(howWin);
-      draw()
-      // finished = true
+      setWinO((prev) => prev + 1);
     } else {
-      console.log(howWin);
-      setWinX(winX + 1);
-      draw()
+      setWinX((prev) => prev + 1);
     }
   };
+
+  // ---------- DRAW CHECK ----------
+  const draw = () => {
+    if (turnInd >= 8 && !finished) {
+      reset();
+    }
+  };
+
+  // ---------- RESET ----------
   const reset = () => {
     setFinished(false);
-    console.log(finished)
     setArray([
       ["", "", ""],
       ["", "", ""],
       ["", "", ""],
     ]);
     setTurnInd(0);
-    console.log(turnInd);
+    setTurn("O");
+    setHowWin("");
+    setIndexAll("");
   };
-  const draw = () => {
-    if (turnInd > 7) {
-      // setFinished(false);
-        // setArray([
-        //   ["", "", ""],
-        //   ["", "", ""],
-        //   ["", "", ""],
-        // ]);
-      // setTurnInd(0);
-      reset(); 
-      // reset();
-    }
-  };
+
   return (
     <div className="App">
       <div className="mainGame">
         <div className="score">
           <p>
-            <b className="blue">O: </b>
-            {winO}
+            <b className="blue">O: </b> {winO}
           </p>
           <p>
-            <b className="red">X: </b>
-            {winX}
+            <b className="red">X: </b> {winX}
           </p>
           <button onClick={reset}>reset</button>
         </div>
-        {array?.map((item, index) => (
+
+        {array.map((row, r) => (
           <div
-            className={`${
-              index === 0 ? "firstRow" : index === 1 ? "secondRow" : "thirdRow"
-            } row`}
+            key={r}
+            className={`${r === 0 ? "firstRow" : r === 1 ? "secondRow" : "thirdRow"} row`}
           >
-            {item?.map((item2, index2) => (
+            {row.map((cell, c) => (
               <div
+                key={c}
                 className={`s ${
-                  index === 0 ? "a a" : index === 1 ? "b b" : "c c"
-                }${index2} ${
-                  index2 === 0 ? "one" : index2 === 1 ? "two" : "three"
-                }`}
+                  r === 0 ? "a a" : r === 1 ? "b b" : "c c"
+                }${c} ${c === 0 ? "one" : c === 1 ? "two" : "three"}`}
               >
                 <h1
-                  className={`${item2 === "O" ? "blue" : "red"}`}
-                  onClick={() => setVal(index, index2)}
+                  className={cell === "O" ? "blue" : "red"}
+                  onClick={() => setVal(r, c)}
                 >
-                  {item2}
+                  {cell}
                 </h1>
               </div>
             ))}
           </div>
         ))}
+
         <h2 className={`over ${finished ? "show" : "hide"} ${howWin}`}></h2>
       </div>
     </div>
   );
 }
+
 export default App;
