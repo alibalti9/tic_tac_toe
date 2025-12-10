@@ -71,7 +71,7 @@ function App() {
     ) {
       win = board[0][0];
       setIndexAll(1);
-      setHowWin("tilt2");
+      setHowWin("tilt1");
     }
     // DIAGONAL 2
     if (
@@ -81,7 +81,7 @@ function App() {
     ) {
       win = board[0][2];
       setIndexAll(2);
-      setHowWin("tilt1");
+      setHowWin("tilt2");
     }
     if (win) {
       winFunc(win);
