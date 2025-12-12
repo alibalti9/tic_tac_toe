@@ -1,1 +1,216 @@
-.App { text-align: center; height: 100vh; width: 100%; background-color: black; margin: 0px !important; display: flex; justify-content: center; align-items: center; } p{ color: white; font-weight: 100; font-size: 40px; margin: 10px; } button{ background-color: black; color: white; border: 1px solid white; border-radius: 5px ; transition: 900ms; margin: 5px; } button:hover{ background-color: white; color: black; border: 1px solid black; box-shadow: white 0 0 0px 1px; } .score{ display: flex; justify-content: center; align-items: center; } .App-logo { height: 40vmin; pointer-events: none; } .blue{ text-shadow: 0 0 14px blue; } .red{ text-shadow: 0 0 14px red; } h1{ color: white; font-size: 100px !important; font-weight: 400; text-shadow: 0 0px 14px red; display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; } .row{ position: relative; } .s{ width: 130px; height: 130px; display: flex; align-items: center !important; justify-content: center; cursor: pointer; } .s0{ transform: rotateZ(90deg) !important; margin-left: 190px !important; top: -48px; } .s1{ transform: rotateZ(90deg) !important; top: 82px !important; margin-left: 190px !important; } .s2{ transform: rotateZ(90deg) !important; left: 50 !important; margin-left: 190px !important; top: 213px; } .stand0{ transform: rotateZ(0deg) !important; left: 50 !important; margin-left: 60px !important; bottom: 0px; } .stand1{ transform: rotateZ(0deg) !important; left: 50 !important; margin-left: 192px !important; bottom: 0px; } .stand2{ transform: rotateZ(0deg) !important; left: 50 !important; margin-left: 324px !important; bottom: 0px; } .tilt1{ transform: rotateZ(135deg) !important; left: 195px !important; top: 65px; height: 390px !important; } .tilt2{ transform: rotateZ(45deg) !important; left: 195px !important; top: 65px; height: 390px !important; } .show{ display: flex ; } .hide{ display: none !important; } .askBox{ width: 200px; height: 200px; border-radius: 5px; border: 2px solid white; box-shadow: blue 0 0 50px 1px; display: flex; justify-content: center; align-items: center; } .over{ color: white; background-color: white; width: 10px; height: 350px; position: absolute; transform: rotateZ(90deg); z-index: 1; border-radius: 5px; box-shadow: blue 0 0 8px 2px; } .a{ border-bottom: cyan 2px solid; } .c{ border-top: cyan 2px solid; } .one{ border-right: cyan 2px solid; } .three{ border-left: cyan 2px solid; } .row{ display: flex; flex-direction: row; } .mainGame{ display: flex; flex-direction: column; position: relative; } @media (prefers-reduced-motion: no-preference) { .App-logo { animation: App-logo-spin infinite 20s linear; } } .App-header { background-color: #282c34; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: calc(10px + 2vmin); color: white; } .App-link { color: #61dafb; } @keyframes App-logo-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.App {
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  background-color: black;
+  margin: 0px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  color: white;
+  font-weight: 100;
+  font-size: 40px;
+  margin: 10px;
+}
+
+button {
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+  transition: 900ms;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  box-shadow: white 0 0 0px 1px;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.blue {
+  text-shadow: 0 0 14px blue;
+}
+
+.red {
+  text-shadow: 0 0 14px red;
+}
+
+h1 {
+  color: white;
+  font-size: 100px !important;
+  font-weight: 400;
+  text-shadow: 0 0px 14px red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.row {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.s {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center !important;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.s0 {
+  transform: rotateZ(90deg) !important;
+  margin-left: 190px !important;
+  top: -48px;
+}
+
+.s1 {
+  transform: rotateZ(90deg) !important;
+  top: 82px !important;
+  margin-left: 190px !important;
+}
+
+.s2 {
+  transform: rotateZ(90deg) !important;
+  left: 50 !important;
+  margin-left: 190px !important;
+  top: 213px;
+}
+
+.stand0 {
+  transform: rotateZ(0deg) !important;
+  left: 50 !important;
+  margin-left: 60px !important;
+  bottom: 0px;
+}
+
+.stand1 {
+  transform: rotateZ(0deg) !important;
+  left: 50 !important;
+  margin-left: 192px !important;
+  bottom: 0px;
+}
+
+.stand2 {
+  transform: rotateZ(0deg) !important;
+  left: 50 !important;
+  margin-left: 324px !important;
+  bottom: 0px;
+}
+
+.tilt1 {
+  transform: rotateZ(135deg) !important;
+  left: 195px !important;
+  top: 65px;
+  height: 390px !important;
+}
+
+.tilt2 {
+  transform: rotateZ(45deg) !important;
+  left: 195px !important;
+  top: 65px;
+  height: 390px !important;
+}
+
+.show {
+  display: flex;
+}
+
+.hide {
+  display: none !important;
+}
+
+.askBox {
+  width: 200px;
+  height: 200px;
+  border-radius: 5px;
+  border: 2px solid white;
+  box-shadow: blue 0 0 50px 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.over {
+  color: white;
+  background-color: white;
+  width: 10px;
+  height: 350px;
+  position: absolute;
+  transform: rotateZ(90deg);
+  z-index: 1;
+  border-radius: 5px;
+  box-shadow: blue 0 0 8px 2px;
+}
+
+.a {
+  border-bottom: cyan 2px solid;
+}
+
+.c {
+  border-top: cyan 2px solid;
+}
+
+.one {
+  border-right: cyan 2px solid;
+}
+
+.three {
+  border-left: cyan 2px solid;
+}
+
+.mainGame {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
